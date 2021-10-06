@@ -24,6 +24,7 @@ export default function App() {
     getCollection(database, "candidates")
       .then((result) => {
         console.log(result);
+
         setCandidates(result as iCandidate[]);
         setStatus(1);
       })

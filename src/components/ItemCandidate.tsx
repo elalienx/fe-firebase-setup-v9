@@ -13,8 +13,7 @@ export default function ItemCandidate({ item }: iProps) {
 
   return (
     <li>
-      {id}
-      <b>{name}</b>, {age}, {relocationText}
+      <b>{name}:</b> {age}, {relocationText}
     </li>
   );
 }
