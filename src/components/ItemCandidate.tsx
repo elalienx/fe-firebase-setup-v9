@@ -6,7 +6,7 @@ interface iProps {
 }
 
 export default function ItemCandidate({ item }: iProps) {
-  const { id, name, age, willingToRelocate } = item;
+  const { name, age, willingToRelocate } = item;
 
   // Properties
   const relocationText = willingToRelocate ? "Is willing to relocate" : "";

@@ -12,6 +12,9 @@ export default function TodoOnClass() {
         <li>Import the firestore depedencies ✅</li>
         <li>Confirm that we can read the database ✅</li>
         <li>Refactor project ✅</li>
+        <li>
+          Fix the lack of the <code>id</code> key ✅
+        </li>
         <li>Play with the C.R.U.D methods</li>
       </ol>
     </section>

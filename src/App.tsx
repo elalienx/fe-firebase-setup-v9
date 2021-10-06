@@ -9,6 +9,7 @@ import firebaseInstance from "scripts/firebase";
 import { getCollection } from "scripts/fireStore";
 import iCandidate from "types/iCandidate";
 import ItemCandidate from "components/ItemCandidate";
+import Form from "components/Form";
 import "./sakura.css";
 
 export default function App() {
@@ -23,8 +24,6 @@ export default function App() {
   useEffect(() => {
     getCollection(database, "candidates")
       .then((result) => {
-        console.log(result);
-
         setCandidates(result as iCandidate[]);
         setStatus(1);
       })
@@ -48,6 +47,7 @@ export default function App() {
 
       {status === 0 && <p>Loading ⏱</p>}
       {status === 1 && <ul>{CandidateItems}</ul>}
+      {status === 1 && <Form database={database} />}
       {status === 2 && <p>Error 🚨</p>}
     </div>
   );
