@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// Project files
+import "./sakura.css";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>FE Firebase Setup V9</h1>
+
+      <h2>Done offline</h2>
+      <ol>
+        <li>
+          Create Firebase project <code>fe-firebase-setup-v9</code> ✅
+        </li>
+        <li>
+          Create Create React App <code>fe-firebase-setup-v9</code> ✅
+        </li>
+        <li>
+          Changed build to build & deploy (
+          <code>react-scripts build && firebase deploy</code>) on{" "}
+          <code>package.json</code>
+        </li>
+        <li>
+          Added
+          <code>"baseUrl": "src"</code> to <code>tsconfig.json</code>
+        </li>
+        <li>Host website</li>
+        <li>Add Sakura CSS to look descend</li>
+      </ol>
+
+      <h2>To do in class</h2>
+      <ol>
+        <li>Refactor this todo list outside App.tsx</li>
+      </ol>
     </div>
   );
 }
-
-export default App;
