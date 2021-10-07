@@ -2,7 +2,7 @@
 import { useState } from "react";
 import iCandidate from "types/iCandidate";
 
-
+// Interface
 interface iProps {
   item: iCandidate;
   onDelete: Function;

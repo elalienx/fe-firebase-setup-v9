@@ -1,6 +1,6 @@
 // NPM packages
 import { useEffect, useState, useCallback } from "react";
-import { getFirestore, updateDoc } from "firebase/firestore/lite";
+import { getFirestore } from "firebase/firestore/lite";
 
 // Project files
 import firebaseInstance from "scripts/firebase";
