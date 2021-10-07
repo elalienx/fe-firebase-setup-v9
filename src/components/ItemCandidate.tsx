@@ -2,6 +2,7 @@
 import { useState } from "react";
 import iCandidate from "types/iCandidate";
 
+
 interface iProps {
   item: iCandidate;
   onDelete: Function;
@@ -16,7 +17,7 @@ export default function ItemCandidate({ item, onDelete, onUpdate }: iProps) {
 
   // Methods
   function onUpdateButton() {
-    const editedCandidate: iCandidate = {
+    const editedCandidate = {
       id: id,
       name: name,
       age: myAge,

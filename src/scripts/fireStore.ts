@@ -7,26 +7,25 @@ import {
   doc,
   deleteDoc,
   updateDoc,
+  DocumentData,
 } from "firebase/firestore/lite";
 
-// C✅.R✅.U⏱.D✅
-
-// Create file
+// Create doc with auto id
 export async function createDoc(db: Firestore, path: string, data: object) {
-  const docRef = await addDoc(collection(db, path), data);
+  const collectionReference = collection(db, path);
 
-  console.log("Document written with ID: ", docRef.id);
+  await addDoc(collectionReference, data);
 }
 
 // Read files
 export async function getCollection(db: Firestore, path: string) {
-  const myCollection = collection(db, path);
-  const mySnapshot = await getDocs(myCollection);
-  const myList = mySnapshot.docs.map((doc) => {
+  const collectionReference = collection(db, path);
+  const snapshop = await getDocs(collectionReference);
+  const list = snapshop.docs.map((doc) => {
     return { id: doc.id, ...doc.data() };
   });
 
-  return myList;
+  return list;
 }
 
 // Update file
@@ -34,17 +33,16 @@ export async function updateDocument(
   db: Firestore,
   path: string,
   id: string,
-  data: Object
+  data: object
 ) {
-  const documentReference = doc(db, path, id);
-  await updateDoc(documentReference, data);
+  const docReference = doc(db, path, id);
 
-  console.log(`Document id: ${id} was updated on ${path}.`);
+  await updateDoc(docReference, data as DocumentData);
 }
 
 // Delete file
 export async function deleteDocument(db: Firestore, path: string, id: string) {
-  await deleteDoc(doc(db, path, id));
+  const docReference = doc(db, path, id);
 
-  console.log(`Document id: ${id} was deleted from ${path}.`);
+  await deleteDoc(docReference);
 }
