@@ -7,7 +7,7 @@ import {
   deleteDocument,
   updateDocument,
 } from "scripts/fireStore";
-import { firestoreReference } from "scripts/firebase";
+import { fireStoreReference } from "scripts/firebase";
 import iCandidate from "types/iCandidate";
 import ItemCandidate from "components/ItemCandidate";
 import Form from "components/Form";
@@ -20,15 +20,15 @@ export default function App() {
 
   // Methods
   function onDelete(id: string) {
-    deleteDocument(firestoreReference, "candidates", id);
+    deleteDocument(fireStoreReference, "candidates", id);
   }
 
   function onUpdate(id: string, editedCandidate: object) {
-    updateDocument(firestoreReference, "candidates", id, editedCandidate);
+    updateDocument(fireStoreReference, "candidates", id, editedCandidate);
   }
 
   const candidatesCallback = useCallback(async () => {
-    const collection = await getCollection(firestoreReference, "candidates");
+    const collection = await getCollection(fireStoreReference, "candidates");
     setCandidates(collection as iCandidate[]);
     setStatus(1);
   }, []);
@@ -53,7 +53,7 @@ export default function App() {
 
       {status === 0 && <p>Loading ⏱</p>}
       {status === 1 && <ul>{CandidateItems}</ul>}
-      {status === 1 && <Form firestoreReference={firestoreReference} />}
+      {status === 1 && <Form firestoreReference={fireStoreReference} />}
       {status === 2 && <p>Error 🚨</p>}
     </div>
   );
