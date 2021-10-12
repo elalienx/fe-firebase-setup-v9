@@ -7,10 +7,10 @@ import { createDoc } from "scripts/fireStore";
 
 // Inteface
 interface iProps {
-  database: Firestore;
+  firestoreReference: Firestore;
 }
 
-export default function Form({ database }: iProps) {
+export default function Form({ firestoreReference }: iProps) {
   // Local storage
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
@@ -25,7 +25,7 @@ export default function Form({ database }: iProps) {
       willingToRelocate: false,
     };
 
-    createDoc(database, "candidates", newCandidate);
+    createDoc(firestoreReference, "candidates", newCandidate);
   }
 
   return (

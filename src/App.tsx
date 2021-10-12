@@ -1,14 +1,13 @@
 // NPM packages
 import { useEffect, useState, useCallback } from "react";
-import { getFirestore } from "firebase/firestore/lite";
 
 // Project files
-import firebaseInstance from "scripts/firebase";
 import {
   getCollection,
   deleteDocument,
   updateDocument,
 } from "scripts/fireStore";
+import { firestoreReference } from "scripts/firebase";
 import iCandidate from "types/iCandidate";
 import ItemCandidate from "components/ItemCandidate";
 import Form from "components/Form";
@@ -19,23 +18,20 @@ export default function App() {
   const [candidates, setCandidates] = useState(Array<iCandidate>());
   const [status, setStatus] = useState(0); // 0: loading, 1: loaded, 2: error
 
-  // Properties
-  const database = getFirestore(firebaseInstance);
-
   // Methods
   function onDelete(id: string) {
-    deleteDocument(database, "candidates", id);
+    deleteDocument(firestoreReference, "candidates", id);
   }
 
   function onUpdate(id: string, editedCandidate: object) {
-    updateDocument(database, "candidates", id, editedCandidate);
+    updateDocument(firestoreReference, "candidates", id, editedCandidate);
   }
 
   const candidatesCallback = useCallback(async () => {
-    const collection = await getCollection(database, "candidates");
+    const collection = await getCollection(firestoreReference, "candidates");
     setCandidates(collection as iCandidate[]);
     setStatus(1);
-  }, [database]);
+  }, []);
 
   useEffect(() => {
     candidatesCallback();
@@ -57,7 +53,7 @@ export default function App() {
 
       {status === 0 && <p>Loading ⏱</p>}
       {status === 1 && <ul>{CandidateItems}</ul>}
-      {status === 1 && <Form database={database} />}
+      {status === 1 && <Form firestoreReference={firestoreReference} />}
       {status === 2 && <p>Error 🚨</p>}
     </div>
   );

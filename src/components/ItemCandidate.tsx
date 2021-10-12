@@ -32,7 +32,6 @@ export default function ItemCandidate({ item, onDelete, onUpdate }: iProps) {
 
   return (
     <li>
-      <button onClick={() => onDelete(id)}>Delete me</button>
       <button onClick={() => onUpdateButton()}>Update me</button>
       <b>{name}:</b>
       <input
@@ -40,6 +39,7 @@ export default function ItemCandidate({ item, onDelete, onUpdate }: iProps) {
         value={myAge}
         onChange={(event) => setMyAge(Number(event.target.value))}
       />
+
       {relocationText}
     </li>
   );
