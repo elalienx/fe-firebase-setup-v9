@@ -1,8 +1,10 @@
 // Project files
-import Placeholder from "assets/images/image-placeholder.png";
 import { useState, FormEvent } from "react";
 import iCandidate from "types/iCandidate";
 import { uploadFile } from "scripts/cloudStorage";
+import dataURLToFile from "scripts/upload-image/dataURLToFile";
+import readImage from "scripts/upload-image/readImage";
+import resizeImage from "scripts/upload-image/resizeImage";
 
 // Interface
 interface iProps {
@@ -36,10 +38,14 @@ export default function ItemCandidate({ item, onUpdate }: iProps) {
   async function onImageChange(event: FormEvent) {
     const target = event.target as HTMLInputElement;
     const file: File = (target.files as FileList)[0];
-    const filename = `images/candidate-image-${name}-${id}.jpg`;
-    const fileUpload = await uploadFile(filename, file);
+    const filename = `images/candidate-image-${name}-${id}.png`;
 
-    // After the break
+    const originalImage = await readImage(file);
+    const resizedImage = await resizeImage(originalImage, 250, 250);
+    const finalImage = await dataURLToFile(resizedImage, `${filename}.png`);
+
+    const fileUpload = await uploadFile(filename, finalImage);
+
     setMyImageURL(fileUpload);
   }
 
@@ -59,6 +65,8 @@ export default function ItemCandidate({ item, onUpdate }: iProps) {
   return (
     <li>
       <button onClick={() => onUpdateButton()}>Update me</button>
+      <br />
+
       <b>{name}:</b>
       {relocationText}
       <a href={cvURL} target="_blank" rel="noreferrer">
@@ -67,10 +75,13 @@ export default function ItemCandidate({ item, onUpdate }: iProps) {
       <br />
 
       {/* File uploader */}
+      <b>Upload CV:</b>
+      <br />
       <input type="file" onChange={(event) => onFileChange(event)} />
       <br />
 
       {/* Image uploader */}
+      <b>Upload Thumbnail:</b>
       <label className="custom-file-chooser">
         <input
           accept="image/gif, image/jpeg, image/png"
