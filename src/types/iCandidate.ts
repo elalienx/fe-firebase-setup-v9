@@ -3,4 +3,6 @@ export default interface iCandidate {
   name: string;
   age: number;
   willingToRelocate: boolean;
+  cvURL: string;
+  imageURL: string;
 }
